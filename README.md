@@ -44,3 +44,12 @@ Chatbot for Mattermost, capable of automatically keeping up to date with Swagger
 - run a http server, which receives post requests from mattermost
   - bot dispatch made by route, since multiple endpoints can be set up
   - bots work as simple state machines, where a message triggers a response, which is just a json post request to mattermost
+
+### What I ended up doing
+
+- hardcoded endpoints ☹️
+- learned some F# 🤓
+- long pooling for messages 🙁
+- bot instances run asynchronously, in parallel 🙂
+
+in the end, even if not fulfilling the whole spec, i'm happy to deliver _something_, and to say i now know more than when i started

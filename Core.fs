@@ -12,7 +12,7 @@ type Posts = { order: string []; posts: Map<string, Post> }
 type BotState = { name: string; last: string option; auth: Auth option; login: Login; group: Group; hook: string }
 let newBot login' group' hook' name' = { name= name'; last= None; auth= None; login= login'; group= group'; hook= hook' }
 
-let mmBase path' = sprintf "http://localhost:8065%s" path'
+let mmBase path' = sprintf "http://mattermost-preview:8065%s" path'
 
 let mmApi path' = path' |> sprintf "/api/v4%s" |> mmBase
 
@@ -80,7 +80,7 @@ let answer (state' : BotState) (post' : Post) =
     | x when x.Contains("and you") -> sprintf "%s:\nme too, thanks @%s" state'.name f
     | x when x.Contains("how are you") -> sprintf "%s:\nim fine @%s\nand you?" state'.name f
     | x when x.Contains("hey") -> sprintf "%s:\nhi @%s\nhow are you?" state'.name f
-    | _ -> ""
+    | _ -> sprintf "%s:\nsorry, I'm not ready" state'.name
     |> fun msg' -> {| text= msg' |}
     |> Json.serialize
     |> sendReq "POST" (state'.hook |> sprintf "/hooks/%s" |> mmBase) [ContentType HttpContentTypes.Json]
@@ -105,7 +105,6 @@ let rec botLoop (state' : BotState) = async {
           | true ->  state'.last
           | false -> posts'
                      |> Seq.map snd
-                     //|> Seq.filter (relevant state')
                      |> Seq.map (answer state')
                      |> Seq.maxBy (fun x -> x.update_at)
                      |> fun x -> x.id

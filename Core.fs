@@ -12,7 +12,7 @@ type Posts = { order: string []; posts: Map<string, Post> }
 type BotState = { name: string; last: string option; auth: Auth option; login: Login; group: Group; hook: string }
 let newBot login' group' hook' name' = { name= name'; last= None; auth= None; login= login'; group= group'; hook= hook' }
 
-let mmBase path' = sprintf "http://mattermost-preview:8065%s" path'
+let mmBase path' = sprintf "http://mattermost:8065%s" path'
 
 let mmApi path' = path' |> sprintf "/api/v4%s" |> mmBase
 

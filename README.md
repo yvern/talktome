@@ -1,8 +1,8 @@
-# Matterwagger
+# talker challenge
 
 ## Goal
 
-Chatbot for Mattermost, capable of automatically keeping up to date with Swagger API, written in F#, running on .Net Core 2.2 and deployable to Linux Debian 9.
+Chatbot capable of automatically keeping up to date with Swagger API, written in F#, running on .Net Core 2.2 and deployable to Linux Debian 9.
 
 ### Steps
 
